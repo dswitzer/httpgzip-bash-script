@@ -25,17 +25,16 @@ httpgzip(){
 		savings_display=$(printf "%.*f" 2 $size_diff);
 		echo "Savings:           $savings_display%";
 	fi
+}
 
 
-	# helper function to convert bytes to human readable
-	function __bytesToHuman() {
-		b=${1:-0}; d=''; s=0; S=(Bytes {K,M,G,T,E,P,Y,Z}B)
-		while ((b > 1024)); do
-			d="$(printf ".%02d" $((b % 1024 * 100 / 1024)))"
-			b=$((b / 1024))
-			let s++
-		done
-		echo "$b$d ${S[$s]}"
-	}
-
+# helper function to convert bytes to human readable
+__bytesToHuman() {
+	b=${1:-0}; d=''; s=0; S=(Bytes {K,M,G,T,E,P,Y,Z}B)
+	while ((b > 1024)); do
+		d="$(printf ".%02d" $((b % 1024 * 100 / 1024)))"
+		b=$((b / 1024))
+		let s++
+	done
+	echo "$b$d ${S[$s]}"
 }
